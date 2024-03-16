@@ -30,7 +30,7 @@ jobs:
           docker rm temp_container
 
           # Create a new Docker image with just the kernel binary
-          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os-kernel:staged - << EOF
+          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:staged - << EOF
           FROM scratch
           ADD kernel.bin /kernel.bin
           EOF
@@ -44,4 +44,4 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           # Push the Docker image containing just the kernel binary
-          docker push ${{ secrets.DOCKER_USERNAME }}/alpha-os-kernel:staged
+          docker push ${{ secrets.DOCKER_USERNAME }}/alpha-os:staged

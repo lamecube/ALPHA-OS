@@ -2,8 +2,7 @@
 rp2040: src/kernel/RP2040/rp2040.asm
 	@echo "Building for RP2040..."
 	mkdir -p build
-	nasm -f elf32 src/kernel/RP2040/rp2040.asm -o build/rp2040.o
-	ld -m elf_i386 -Ttext 0x0 --oformat binary build/rp2040.o -o build/rp2040.bin
+	nasm -f elf32 src/kernel/RP2040/rp2040.asm -o build/rp2040.elf
 
 # esp32: src/kernel/ESP32/esp32.asm
 # 	@echo "Building for ESP32..."

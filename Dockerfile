@@ -1,5 +1,5 @@
 # Use an ARM-based image as the base
-FROM arm32v7/node:21-bullseye-slim
+FROM arm32v7/alpine
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y \

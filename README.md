@@ -1,6 +1,14 @@
 # ALPHA-OS
 
 Welcome to ALPHA-OS!
+# ALPHA-OS
+
+[![Pipeline Status](https://github.com/lamecube/alpha-os/actions/workflows/main.yml/badge.svg)](https://github.com/lamecube/alpha-os/actions/workflows/build-container.yml)
+
+Welcome to ALPHA-OS!
+
+<!-- Rest of your content -->
+
 
 ALPHA-OS is a lightweight operating system kernel designed specifically for prosthetic devices, with a focus on embedded systems and microcontroller-based platforms like the RP2040 and ESP32. It provides a flexible and customizable foundation for building firmware and applications tailored to the needs of prosthetic technology.
 

@@ -25,7 +25,7 @@ jobs:
           docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:staged .
 
           # Create a temporary container to copy the kernel binary out of the ISO image
-          docker create --name temp_container alpha-os:staged
+          docker create --name temp_container ${{ secrets.DOCKER_USERNAME }}/alpha-os:staged
           docker cp temp_container:/boot/kernel.bin kernel.bin
           docker rm temp_container
 

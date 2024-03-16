@@ -3,7 +3,7 @@
 Welcome to ALPHA-OS!
 # ALPHA-OS
 
-[![Pipeline Status](https://github.com/lamecube/alpha-os/actions/workflows/build-container.yml)]
+![Pipeline Status](https://github.com/lamecube/alpha-os/actions/workflows/build-container.yml)
 
 Welcome to ALPHA-OS!
 

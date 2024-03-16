@@ -1,39 +1,34 @@
-# Use an existing base image as the starting point
-FROM ubuntu:20.04 AS build
-ENV DEBIAN_FRONTEND noninteractive
+# Use a base image with necessary development tools
+FROM ubuntu:latest
 
-# Set the timezone to UTC to prevent interactive prompts
-RUN ln -fs /usr/share/zoneinfo/UTC /etc/localtime && \
-    apt-get update && \
-    apt-get install -y \
-    build-essential \
-    cmake \
-    git \
-    wget \
-    unzip
+# Install required packages
+RUN apt-get update && apt-get install -y \
+    nasm \
+    gcc \
+    grub-common \
+    xorriso \
+    qemu-system-x86
 
-# Set up Pico SDK
-ENV PICO_SDK_PATH=/pico-sdk
-RUN git clone -b master https://github.com/raspberrypi/pico-sdk.git $PICO_SDK_PATH
+# Set up a working directory
+WORKDIR /hello_os
 
-# Set the working directory
-WORKDIR /alpha-os
+# Copy the source files into the container
+COPY ./src/ .
 
-# Copy the Pico SDK import CMake file
-COPY ./src/kernel/RP2040/ .
+# Compile the bootloader
+RUN nasm -f bin bootloader.asm -o bootloader.bin
 
-# Build the project
-RUN cmake -DCMAKE_BUILD_TYPE=Release . && \
-    make
+# Compile the kernel
+RUN gcc -ffreestanding -c kernel.c -o kernel.o
 
-# Use a minimal image as the final image
-FROM alpine:latest
+# Link the kernel object file
+RUN ld -o kernel.bin -Ttext 0x1000 kernel.o --oformat binary
 
-# Copy the built kernel from the build stage
-COPY --from=build /alpha-os/rp2040.elf /alpha-os/
+# Create disk image
+RUN mkdir -p isodir/boot/grub \
+    && cp kernel.bin isodir/boot/kernel.bin \
+    && echo "menuentry 'Hello World OS' { multiboot /boot/kernel.bin }" > isodir/boot/grub/grub.cfg \
+    && grub-mkrescue -o os.iso isodir
 
-# Install QEMU for ARM emulation
-RUN apk --no-cache add qemu-system-arm
-
-# Command to run QEMU with the built kernel
-CMD ["qemu-system-arm", "-kernel", "/alpha-os/rp2040.elf"]
+# Define a command to run when the container starts
+CMD ["qemu-system-x86_64", "-cdrom", "os.iso"]

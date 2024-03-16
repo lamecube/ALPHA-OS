@@ -16,18 +16,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx      
-        uses: crazy-max/ghaction-docker-buildx@v1      
-        with:        
-          version: latest    
-      
-      - name: Prepare      
-        if: success()      
-        id: prepare      
-        run: |        
-          echo ::set-output name=docker_platform::${DOCKER_TARGET_PLATFORM}        
-          echo ::set-output name=docker_image::${DOCKER_REGISTRY}/${DOCKER_IMAGE}        
-          echo ::set-output name=version::${GITHUB_RUN_NUMBER}   
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
       - name: Build Docker image
         run: |

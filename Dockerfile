@@ -17,7 +17,7 @@ WORKDIR /alpha-os
 COPY . .
 
 # Build the kernel
-RUN make clean && make
+# RUN make clean && make
 
 # Command to run QEMU with the built kernel
 CMD qemu-system-arm-static -kernel kernel.elf

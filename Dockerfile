@@ -7,7 +7,7 @@ RUN apk update && apk add --no-cache \
     gcc-arm-none-eabi \
     binutils-arm-none-eabi \
     git \
-    qemu-system-arm
+    qemu-system-arm-static
 
 # Set the working directory
 WORKDIR /alpha-os
@@ -19,4 +19,4 @@ COPY . .
 RUN make clean && make
 
 # Command to run QEMU with the built kernel
-CMD qemu-system-arm -kernel kernel.elf
+CMD qemu-system-arm-static -kernel kernel.elf

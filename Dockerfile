@@ -1,24 +1,28 @@
 # Use an existing base image as the starting point
-FROM ubuntu:20.04 AS build
+FROM arm32v7/alpine AS build
 
-# Update the package list
-RUN apt-get update
+# Install necessary packages
+RUN apk update && apk add --no-cache \
+    build-base \
+    gcc-arm-none-eabi \
+    binutils-arm-none-eabi \
+    git \
+    qemu-system-arm-static
 
-# Install NASM and LD
-RUN apt-get install -y nasm binutils
+# Set the working directory
+WORKDIR /alpha-os
 
-# Copy the assembly code into the container
-COPY hello.asm /app/
+# Copy the kernel source code into the container
+COPY . .
 
-# Assemble and link the code
-RUN nasm -f elf -o /app/hello.o /app/hello.asm
-RUN ld -m elf_i386 -s -o /app/hello /app/hello.o
+# Build the kernel
+RUN make clean && make
 
 # Use a minimal image as the final image
-FROM alpine:latest
+FROM arm32v7/alpine:latest
 
-# Copy the executable from the build stage
-COPY --from=build /app/hello /app/
+# Copy the built kernel from the build stage
+COPY --from=build /alpha-os/kernel.elf /alpha-os/
 
-# Run the executable
-CMD ["/app/hello"]
+# Command to run QEMU with the built kernel
+CMD ["qemu-system-arm-static", "-kernel", "/alpha-os/kernel.elf"]

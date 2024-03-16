@@ -1,8 +1,10 @@
 # Use an existing base image as the starting point
 FROM ubuntu:20.04 AS build
 ENV DEBIAN_FRONTEND noninteractive
-# Install necessary dependencies
-RUN apt-get update && \
+
+# Set the timezone to UTC to prevent interactive prompts
+RUN ln -fs /usr/share/zoneinfo/UTC /etc/localtime && \
+    apt-get update && \
     apt-get install -y \
     build-essential \
     cmake \

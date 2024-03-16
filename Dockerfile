@@ -1,6 +1,6 @@
 # Use an existing base image as the starting point
 FROM ubuntu:20.04 AS build
-
+ENV DEBIAN_FRONTEND noninteractive
 # Install necessary dependencies
 RUN apt-get update && \
     apt-get install -y \

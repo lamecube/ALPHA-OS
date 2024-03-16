@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
@@ -30,3 +27,12 @@ jobs:
           # Build the Docker image from the Dockerfile in your repository
           docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:staged .
 
+      - name: Copy ISO to host
+        run: |
+          cp stdio:os.iso ./os.iso
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: os-iso
+          path: ./os.iso

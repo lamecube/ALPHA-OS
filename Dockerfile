@@ -1,13 +1,9 @@
 # Use an existing base image as the starting point
-FROM arm32v7/alpine AS build
+FROM ubuntu:20.04 AS build
 
-# Install necessary packages
-RUN apk update && apk add --no-cache \
-    build-base \
-    gcc-arm-none-eabi \
-    binutils-arm-none-eabi \
-    git \
-    qemu-system-arm-static
+# Update the package list and install necessary tools
+RUN apt-get update && \
+    apt-get install -y build-essential git qemu-system-arm
 
 # Set the working directory
 WORKDIR /alpha-os
@@ -19,10 +15,13 @@ COPY . .
 RUN make clean && make
 
 # Use a minimal image as the final image
-FROM arm32v7/alpine:latest
+FROM alpine:latest
+
+# Install QEMU for ARM emulation
+RUN apk --no-cache add qemu-system-arm
 
 # Copy the built kernel from the build stage
 COPY --from=build /alpha-os/kernel.elf /alpha-os/
 
 # Command to run QEMU with the built kernel
-CMD ["qemu-system-arm-static", "-kernel", "/alpha-os/kernel.elf"]
+CMD ["qemu-system-arm", "-kernel", "/alpha-os/kernel.elf"]

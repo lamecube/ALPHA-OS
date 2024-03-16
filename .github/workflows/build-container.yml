@@ -20,6 +20,7 @@ jobs:
         id: build-image
         run: |
           # Build the Docker image from the Dockerfile in your repository
+          docker buildx create --name alpha-os --driver=docker-container
           docker buildx build --platform linux/amd64,linux/arm64 -t "alpha-os:staged" .
           docker image ls
           docker run "alpha-os:staged"

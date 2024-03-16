@@ -24,10 +24,6 @@ jobs:
           docker buildx build --builder=container --platform linux/amd64 -t "alpha-os:staged" .
           docker run --name alpha-os-container -d alpha-os:staged
 
-      - name: Start Docker container
-        if: steps.build-image.outcome == 'success'
-        run: docker run --name alpha-os-container -d alpha-os:staged
-
       - name: Export Docker image
         if: steps.build-image.outcome == 'success'
         run: docker save alpha-os:staged > alpha-os.tar

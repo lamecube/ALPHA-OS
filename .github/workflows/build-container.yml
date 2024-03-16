@@ -22,16 +22,17 @@ jobs:
       - name: Build Docker image
         run: |
           # Build the Docker image from the Dockerfile in your repository
-          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:staging .
+          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:latest .
 
           # Extract the kernel binary from the ISO image
-          docker run --rm -v $(pwd):/mnt ubuntu bash -c 'mount -o loop /mnt/os.iso /mnt/iso && cp /mnt/iso/boot/kernel.bin /mnt && umount /mnt/iso'
+          docker run --rm -v $(pwd):/mnt --privileged ubuntu bash -c 'mount -o loop /mnt/os.iso /mnt/iso && cp /mnt/iso/boot/kernel.bin /mnt && umount /mnt/iso'
 
           # Create a new Docker image with just the kernel binary
-          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os-kernel:staging - << EOF
+          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os-kernel:latest - << EOF
           FROM scratch
           ADD kernel.bin /kernel.bin
           EOF
+
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1

@@ -28,19 +28,9 @@ jobs:
       - name: Build Docker image
         run: |
           # Build the Docker image from the Dockerfile in your repository
-          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:full -t alpha-os:staged .
+          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:staged .
 
           # Create a temporary container to copy the kernel binary out of the ISO image
           docker create --name temp_container alpha-os:staged
           docker cp temp_container:/boot/kernel.bin kernel.bin
           docker rm temp_container
-
-          # Push the kernel binary as a separate Docker image
-          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os-kernel:staged - << EOF
-          FROM scratch
-          ADD kernel.bin /kernel.bin
-          EOF
-
-          # Push the Docker image containing the full OS
-          docker push ${{ secrets.DOCKER_USERNAME }}/alpha-os:full
-          

@@ -3,7 +3,7 @@ FROM ubuntu:20.04 AS build
 
 # Update the package list and install necessary tools
 RUN apt-get update && \
-    apt-get install -y build-essential git qemu-system-arm-static
+    apt-get install -y build-essential git binfmt-support qemu-user-static
 
 # Set the working directory
 WORKDIR /alpha-os

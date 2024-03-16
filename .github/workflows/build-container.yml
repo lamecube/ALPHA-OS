@@ -29,13 +29,17 @@ jobs:
         if: steps.build-image.outcome == 'success'
         run: docker run --name alpha-os-container -d alpha-os:staged
 
+      - name: Export Docker image
+        if: steps.build-image.outcome == 'success'
+        run: docker save alpha-os:staged > alpha-os.tar
+
       - name: Copy ISO to host
         run: docker cp $(docker ps -q -f ancestor=alpha-os:staged):/alpha_os/isodir/os.iso ./os.iso
         if: steps.build-image.outcome == 'success'
 
-      - name: Upload ISO artifact
+      - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: os-iso
-          path: ./os.iso
+          name: docker-image
+          path: alpha-os.tar
         if: steps.build-image.outcome == 'success'

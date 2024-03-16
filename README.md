@@ -1,8 +1,5 @@
 # ALPHA-OS
 
-Welcome to ALPHA-OS!
-# ALPHA-OS
-
 [![Build Docker Container](https://github.com/lamecube/ALPHA-OS/actions/workflows/build-container.yml/badge.svg)](https://github.com/lamecube/ALPHA-OS/actions/workflows/build-container.yml)
 
 Welcome to ALPHA-OS!

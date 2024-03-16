@@ -27,9 +27,11 @@ jobs:
           # Build the Docker image from the Dockerfile in your repository
           docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:staged .
 
+      - name: Start Docker container
+        run: docker run --name alpha-os-container -d alpha-os:staged
+
       - name: Copy ISO to host
         run: docker cp $(docker ps -q -f ancestor=alpha-os:staged):/alpha_os/isodir/os.iso ./os.iso
-
 
       - name: Upload ISO artifact
         uses: actions/upload-artifact@v2

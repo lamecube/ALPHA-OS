@@ -25,7 +25,7 @@ jobs:
           docker run "alpha-os:staged"
 
           docker ps -a
-        continue-on-error: true
+
 
       - name: Start Docker container
         if: steps.build-image.outcome == 'success'

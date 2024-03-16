@@ -26,7 +26,7 @@ main:
     movs r1, #1
     bl gpio_set_dir
 
-    /* Toggle the GPIO pin in a loop */
+/* Loop to toggle the GPIO pin */
 loop:
     /* Toggle the pin state */
     bl gpio_get_state
@@ -91,19 +91,3 @@ sleep_us:
 .section .data
 DELAY_TIME_MS:
     .word 2000  /* Sleep period in milliseconds */
-
-/* Define CPUID register */
-CPUID:
-    .word 0xE000ED00  /* Address of the CPUID register */
-
-/* Define ASCII strings for printf */
-ASCII_CPU_INFO:
-    .asciz "CPU Info: %08x\n"
-ASCII_ARCHITECTURE:
-    .asciz "Architecture: %08x\n"
-ASCII_IMPLEMENTER:
-    .asciz "Implementer: %08x\n"
-ASCII_VARIANT:
-    .asciz "Variant: %08x\n"
-ASCII_PARTNO:
-    .asciz "Part No: %08x\n"

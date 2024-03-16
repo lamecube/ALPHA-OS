@@ -23,12 +23,12 @@ jobs:
         run: |
           docker buildx build --platform linux/amd64,linux/arm64 -t your-image-name:latest .
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME || 'human' }}
-          password: ${{ secrets.DOCKER_PASSWORD || 'being' }}
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v1
+      #   with:
+      #     username: ${{ secrets.DOCKER_USERNAME || 'human' }}
+      #     password: ${{ secrets.DOCKER_PASSWORD || 'being' }}
 
-      - name: Push Docker image to Docker Hub
-        run: |
-          docker push your-image-name:latest
+      # - name: Push Docker image to Docker Hub
+      #   run: |
+      #     docker push your-image-name:latest

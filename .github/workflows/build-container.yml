@@ -22,12 +22,6 @@ jobs:
           # Build the Docker image from the Dockerfile in your repository
           docker buildx create --name container --driver docker-container
           docker buildx build --builder=container --platform linux/amd64,linux/arm64 -t "alpha-os:staged" .
-          docker image ls
-          docker container ls
-          docker run "alpha-os:staged"
-
-          docker ps -a
-
 
       - name: Start Docker container
         if: steps.build-image.outcome == 'success'

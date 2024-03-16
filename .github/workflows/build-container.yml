@@ -33,4 +33,4 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           # Push the Docker image to Docker Hub
-          docker push ${{ secrets.DOCKER_USERNAME }}/alpha-os:staged
+          docker push alpha-os:staged

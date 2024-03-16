@@ -12,7 +12,7 @@ WORKDIR /alpha-os
 COPY . .
 
 # Build the kernel
-RUN nasm -f elf32 src/kernel/rp2040.asm -o rp2040.o && \
+RUN nasm -f elf32 ./src/kernel/RP2040/rp2040.asm -o rp2040.o && \
     ld -m elf_i386 -o rp2040.elf rp2040.o
 
 # Use a minimal image as the final image

@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y \
     qemu-system-x86
 
 # Set up a working directory
-WORKDIR /hello_os
+WORKDIR /alpha_os
 
 # Copy the source files into the container
-COPY . .
+COPY ./src/ .
 
 # Compile the bootloader
 RUN nasm -f bin bootloader.asm -o bootloader.bin

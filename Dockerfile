@@ -12,7 +12,8 @@ WORKDIR /alpha-os
 COPY . .
 
 # Build the kernel
-RUN make clean && make rp2040
+RUN nasm -f elf32 rp2040.asm -o rp2040.o && \
+    ld -m elf_i386 -o rp2040.elf rp2040.o
 
 # Use a minimal image as the final image
 FROM alpine:latest
@@ -21,7 +22,7 @@ FROM alpine:latest
 RUN apk --no-cache add qemu-system-arm
 
 # Copy the built kernel from the build stage
-COPY --from=build /alpha-os/build/rp2040.elf /alpha-os/
+COPY --from=build /alpha-os/rp2040.elf /alpha-os/
 
 # Command to run QEMU with the built kernel
 CMD ["qemu-system-arm", "-kernel", "/alpha-os/rp2040.elf"]

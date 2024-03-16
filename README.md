@@ -4,7 +4,7 @@ Welcome to ALPHA-OS!
 
 ALPHA-OS is a lightweight operating system kernel designed specifically for prosthetic devices, with a focus on embedded systems and microcontroller-based platforms like the RP2040 and ESP32. It provides a flexible and customizable foundation for building firmware and applications tailored to the needs of prosthetic technology.
 
-ALPHA-OS is dedicated to James and Gayle Gabbert, in gratitude for their unwavering support and guidance. James instilled in me the values of resilience and perseverance, teaching me to embrace challenges and strive for excellence. Gayle provided the nurturing environment and encouragement that enabled me to pursue my passions and aspirations. Together, they exemplify the power of love, sacrifice, and mentorship, inspiring me to pay it forward by contributing to projects like ALPHA-OS.
+ALPHA-OS is dedicated to James and Gayle Gabbert, for their unwavering support and guidance, and to Howard Redinger, for his ever-guiding wisdom and patience. James instilled in me the values of resilience and perseverance, teaching me to embrace challenges and strive for excellence. Gayle provided the nurturing environment and encouragement that enabled me to pursue my passions and aspirations. Howard exemplifies the power of empathy and understanding, transcending bias and social class to truly listen and connect with others. Together, they have shaped my journey and inspired me to contribute to projects like ALPHA-OS, with the goal of making a positive impact on humanity.
 
 ## Features:
 
@@ -25,7 +25,7 @@ To start using ALPHA-OS for prosthetic development, follow these steps:
 1. **Clone the Repository:** Clone the ALPHA-OS repository to your local machine using Git.
 
     ```bash
-    git clone https://github.com/lamecube/alpha-os.git
+    git clone https://github.com/your-username/alpha-os.git
     ```
 
 2. **Customize and Build:** Customize the kernel according to your prosthetic device specifications and build it using the provided build scripts or instructions.

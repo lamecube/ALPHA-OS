@@ -8,8 +8,8 @@ ENV PASSWORD='being'
 # Install necessary packages
 RUN apk update && \
     apk add --no-cache \
-    build-base \
-    gcc-arm-none-eabi \
+    # build-base \
+    # gcc-arm-none-eabi \
     # binutils-arm-none-eabi \
     # git \
     # qemu-system-arm-static && \

@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y \
     qemu-system-x86
 
 # Set up a working directory
-WORKDIR /alpha_os
+WORKDIR /hello_os
 
 # Copy the source files into the container
-COPY ./src/ .
+COPY . .
 
 # Compile the bootloader
 RUN nasm -f bin bootloader.asm -o bootloader.bin
@@ -21,8 +21,9 @@ RUN nasm -f bin bootloader.asm -o bootloader.bin
 # Compile the kernel
 RUN gcc -ffreestanding -c kernel.c -o kernel.o
 
-# Link the kernel object file
-RUN ld -o kernel.bin -Ttext 0x1000 kernel.o --oformat binary
+# Link the kernel object file and convert to binary format
+RUN ld -o kernel.elf -Ttext 0x1000 kernel.o
+RUN objcopy -O binary kernel.elf kernel.bin
 
 # Create disk image
 RUN mkdir -p isodir/boot/grub \

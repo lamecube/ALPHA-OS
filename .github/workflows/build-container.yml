@@ -22,15 +22,15 @@ jobs:
       - name: Build Docker image
         run: |
           # Build the Docker image from the Dockerfile in your repository
-          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:latest .
+          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:staged .
 
           # Create a temporary container to copy the kernel binary out of the ISO image
-          docker create --name temp_container alpha-os:latest
+          docker create --name temp_container alpha-os:staged
           docker cp temp_container:/boot/kernel.bin kernel.bin
           docker rm temp_container
 
           # Create a new Docker image with just the kernel binary
-          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os-kernel:latest - << EOF
+          docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os-kernel:staged - << EOF
           FROM scratch
           ADD kernel.bin /kernel.bin
           EOF
@@ -44,4 +44,4 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           # Push the Docker image containing just the kernel binary
-          docker push ${{ secrets.DOCKER_USERNAME }}/alpha-os-kernel:staging
+          docker push ${{ secrets.DOCKER_USERNAME }}/alpha-os-kernel:staged

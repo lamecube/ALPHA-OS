@@ -1,5 +1,5 @@
 # Use an ARM-based image as the base
-FROM arm32v7/debian:bullseye
+FROM arm32v7/node:21-bullseye-slim
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y \

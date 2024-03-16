@@ -28,8 +28,8 @@ jobs:
           docker buildx build --platform linux/amd64,linux/arm64 -t alpha-os:staged .
 
       - name: Copy ISO to host
-        run: |
-          cp stdio:os.iso ./os.iso
+        run: docker cp $(docker ps -q -f ancestor=alpha-os:staged):/alpha_os/isodir/os.iso ./os.iso
+
 
       - name: Upload ISO artifact
         uses: actions/upload-artifact@v2

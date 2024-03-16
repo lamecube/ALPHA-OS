@@ -31,5 +31,11 @@ RUN mkdir -p isodir/boot/grub \
     && echo "menuentry 'Hello World OS' { multiboot /boot/kernel.bin }" > isodir/boot/grub/grub.cfg \
     && grub-mkrescue -o os.iso isodir
 
+# Copy the test script into the container
+COPY ./test.sh .
+
+# Run the test script
+RUN chmod +x test.sh && ./test.sh
+
 # Define a command to run when the container starts
 CMD ["qemu-system-x86_64", "-cdrom", "os.iso"]

@@ -2,8 +2,8 @@
 FROM arm32v7/alpine
 
 # Install necessary packages
-RUN apt-get update && apt-get install -y \
-    build-essential \
+RUN apk update && apk add --no-cache \
+    build-base \
     gcc-arm-none-eabi \
     binutils-arm-none-eabi \
     git \

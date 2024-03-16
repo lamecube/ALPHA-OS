@@ -4,7 +4,7 @@ This document provides troubleshooting tips and solutions for common issues enco
 
 ## Issue: Unable to Build ALPHA-OS
 
-### Solution:
+### Solution
 
 If you encounter build errors while compiling ALPHA-OS, try the following steps:
 
@@ -15,7 +15,7 @@ If you encounter build errors while compiling ALPHA-OS, try the following steps:
 
 ## Issue: Device Not Detected
 
-### Solution:
+### Solution
 
 If your prosthetic device is not detected or recognized by ALPHA-OS, try the following steps:
 

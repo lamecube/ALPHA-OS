@@ -44,5 +44,3 @@ jobs:
           # Push the Docker image containing the full OS
           docker push ${{ secrets.DOCKER_USERNAME }}/alpha-os:full
           
-          # Push the Docker image containing just the kernel binary
-          docker push ${{ secrets.DOCKER_USERNAME }}/alpha-os-kernel:staged

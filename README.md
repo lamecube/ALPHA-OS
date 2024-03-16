@@ -28,11 +28,22 @@ To start using ALPHA-OS for prosthetic development, follow these steps:
     git clone https://github.com/your-username/alpha-os.git
     ```
 
-2. **Customize and Build:** Customize the kernel according to your prosthetic device specifications and build it using the provided build scripts or instructions.
+2. **Build the Docker Container:** Navigate to the ALPHA-OS directory and build the Docker container using the provided Dockerfile.
 
-3. **Test and Deploy:** Test the kernel on your target prosthetic hardware using appropriate emulation or deployment methods. ALPHA-OS supports popular microcontroller-based development boards commonly used in prosthetic research and development.
+    ```bash
+    cd alpha-os
+    docker build -t alpha-os .
+    ```
 
-4. **Develop Applications:** Develop and deploy applications on top of ALPHA-OS to create innovative prosthetic solutions tailored to the unique needs and requirements of users with limb loss or impairment.
+3. **Run the Docker Container:** Once the Docker container is built, you can run it using the following command. Replace `your-port` with the desired port number for accessing the container.
+
+    ```bash
+    docker run -d -p your-port:80 alpha-os
+    ```
+
+4. **Test and Deploy:** Access the ALPHA-OS environment by navigating to `http://localhost:your-port` in your web browser. You can now test and deploy applications on top of ALPHA-OS to create innovative prosthetic solutions.
+
+5. **Develop Applications:** Develop and deploy applications on top of ALPHA-OS to create innovative prosthetic solutions tailored to the unique needs and requirements of users with limb loss or impairment.
 
 ## Contributing:
 
